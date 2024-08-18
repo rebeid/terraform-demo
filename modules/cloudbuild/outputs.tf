@@ -1,3 +1,7 @@
+output "service_account" {
+  value = google_service_account.service_account.display_name
+}
+
 output "sa_user" {
   value = google_project_iam_member.sa_user.role
 }

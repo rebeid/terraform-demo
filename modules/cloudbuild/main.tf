@@ -21,6 +21,7 @@ resource "google_cloudbuild_trigger" "cloudbuild_trigger" {
 
 resource "google_service_account" "service_account" {
   account_id = "cloudbuild-sa"
+  display_name = "cloudbuild-sa"
 }
 
 resource "google_project_iam_member" "sa_user" {
