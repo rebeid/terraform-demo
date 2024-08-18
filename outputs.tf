@@ -2,6 +2,10 @@ output "firewall_rule" {
   value = module.firewall.firewall_rule
 }
 
+output "docker_repo" {
+  value = module.docker_repo.my_repository
+}
+
 output "github_repo" {
   value = module.github_repo.my_repository
 }
