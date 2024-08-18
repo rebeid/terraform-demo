@@ -1,5 +1,7 @@
 # terraform-demo
 
+Simple Terraform modules to create & manage all the resources for [cloud-build-demo](https://github.com/rebeid/cloud-build-demo) to work
+
 ```
 🪴 tree | egrep -v 'tfplan|tfstate|tfvars|json|txt|files'
 .
