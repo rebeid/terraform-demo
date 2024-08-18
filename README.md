@@ -1,5 +1,6 @@
 # terraform-demo
 
+```
 🪴 tree | egrep -v 'tfplan|tfstate|tfvars|json|txt|files'
 .
 ├── README.md
@@ -20,3 +21,4 @@
 ├── outputs.tf
 ├── variables.tf
 └── versions.tf
+```
