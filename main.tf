@@ -1,24 +1,30 @@
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs
 provider "google" {
-  project     = var.project
-  region      = var.region
-  credentials = "${file(var.credentials_file)}"
+  project     = var.gcp_project_id
+  region      = var.gcp_region
+  credentials = "${file(var.gcp_svc_acct_key_file)}"
 }
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall
-resource "google_compute_firewall" "custom-rule" {
-    name        = "custom-allow-8090"
-    network     = "default"
-    description = "Firewall rule targeting tagged instances"
+module "firewall" {
+  source     = "./modules/firewall"
 
-    allow {
-      protocol = "tcp"
-      ports    = ["8090"]
-    }
-
-    target_tags   = ["allow-8090"]
-    source_ranges = ["0.0.0.0/0"]
+  name       = var.firewall_name
+  port       = var.firewall_port
+  target_tag = var.firewall_target_tag
 }
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger
+module "github_repo" {
+  source     = "./modules/github_repo"
+
+  gcp_project_number         = var.gcp_project_number
+  gcp_region                 = var.gcp_region
+  github_app_installation_id = var.github_app_installation_id
+}
+
+module "cloudbuild" {
+  source     = "./modules/cloudbuild"
+
+  gcp_project_id   = var.gcp_project_id
+  gcp_region       = var.gcp_region
+  github_repositry = module.github_repo.my_repository
+}
