@@ -30,7 +30,7 @@ resource "google_secret_manager_secret_iam_policy" "policy" {
 
 resource "google_cloudbuildv2_connection" "my_connection" {
     location = var.gcp_region
-    name     = "my-github-connection"
+    name     = "github"
 
     github_config {
         app_installation_id = var.github_app_installation_id

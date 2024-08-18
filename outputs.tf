@@ -1,9 +1,17 @@
-output "my_firewall_rule" {
+output "firewall_rule" {
   value = module.firewall.firewall_rule
 }
 
-output "my_github_repo" {
+output "docker_repo" {
+  value = module.docker_repo.my_repository
+}
+
+output "github_repo" {
   value = module.github_repo.my_repository
+}
+
+output "service_account" {
+  value = module.cloudbuild.service_account
 }
 
 output "sa_role_1" {

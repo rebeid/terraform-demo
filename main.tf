@@ -5,6 +5,20 @@ provider "google" {
   credentials = "${file(var.gcp_svc_acct_key_file)}"
 }
 
+module "cloudbuild" {
+  source     = "./modules/cloudbuild"
+
+  gcp_project_id   = var.gcp_project_id
+  gcp_region       = var.gcp_region
+  github_repositry = module.github_repo.my_repository
+}
+
+module "docker_repo" {
+  source     = "./modules/docker_repo"
+
+  gcp_region       = var.gcp_region
+}
+
 module "firewall" {
   source     = "./modules/firewall"
 
@@ -19,12 +33,4 @@ module "github_repo" {
   gcp_project_number         = var.gcp_project_number
   gcp_region                 = var.gcp_region
   github_app_installation_id = var.github_app_installation_id
-}
-
-module "cloudbuild" {
-  source     = "./modules/cloudbuild"
-
-  gcp_project_id   = var.gcp_project_id
-  gcp_region       = var.gcp_region
-  github_repositry = module.github_repo.my_repository
 }

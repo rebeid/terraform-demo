@@ -1,6 +1,6 @@
 # terraform-demo
 
-Simple Terraform modules to create & manage all the resources for [cloud-build-demo](https://github.com/rebeid/cloud-build-demo) to work
+Simple Terraform modules to create & manage all the GCP resources for [cloud-build-demo](https://github.com/rebeid/cloud-build-demo) to work
 
 ```
 🪴 tree | egrep -v 'tfplan|tfstate|tfvars|json|txt|files'
@@ -9,6 +9,10 @@ Simple Terraform modules to create & manage all the resources for [cloud-build-d
 ├── main.tf
 ├── modules
 │   ├── cloudbuild
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── docker_repo
 │   │   ├── main.tf
 │   │   ├── outputs.tf
 │   │   └── variables.tf
