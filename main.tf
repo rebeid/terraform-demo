@@ -34,3 +34,10 @@ module "github_repo" {
   gcp_region                 = var.gcp_region
   github_app_installation_id = var.github_app_installation_id
 }
+
+module "clouddeploy" {
+  source     = "./modules/clouddeploy"
+
+  project = var.gcp_project_id
+  region  = var.gcp_region
+}

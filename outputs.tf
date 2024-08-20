@@ -14,18 +14,30 @@ output "service_account" {
   value = module.cloudbuild.service_account
 }
 
-output "sa_role_1" {
+output "service_account_role_1" {
   value = module.cloudbuild.sa_user
 }
 
-output "sa_role_2" {
+output "service_account_role_2" {
   value = module.cloudbuild.log_writer
 }
 
-output "sa_role_3" {
+output "service_account_role_3" {
   value = module.cloudbuild.repo_admin
 }
 
-output "sa_role_4" {
+output "service_account_role_4" {
   value = module.cloudbuild.instance_admin
+}
+
+output "service_account_role_5" {
+  value = module.cloudbuild.cloud_deploy_operator
+}
+
+output "service_account_role_6" {
+  value = module.cloudbuild.storage_admin
+}
+
+output "delivery_pipeline" {
+  value = module.clouddeploy.delivery_pipeline
 }
