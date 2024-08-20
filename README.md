@@ -1,14 +1,33 @@
 # terraform-demo
 
-Simple Terraform modules to create & manage all the GCP resources for [cloud-build-demo](https://github.com/rebeid/cloud-build-demo) to work
+Simple Terraform modules to create & manage the GCP resources needed for [cloud-build-demo](https://github.com/rebeid/cloud-build-demo)
 
 ```
-🪴 tree | egrep -v 'tfplan|tfstate|tfvars|json|txt|files'
+🪴 tree . | egrep -v 'tfplan|tfstate|tfvars|json|txt|files'
 .
 ├── README.md
+├── environments
+│   ├── dev
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── variables.tf
+│   │   └── versions.tf
+│   └── prod
+│       ├── main.tf
+│       ├── outputs.tf
+│       ├── variables.tf
+│       └── versions.tf
 ├── main.tf
 ├── modules
+│   ├── cloud_deploy_target
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
 │   ├── cloudbuild
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── clouddeploy
 │   │   ├── main.tf
 │   │   ├── outputs.tf
 │   │   └── variables.tf
@@ -20,7 +39,15 @@ Simple Terraform modules to create & manage all the GCP resources for [cloud-bui
 │   │   ├── main.tf
 │   │   ├── outputs.tf
 │   │   └── variables.tf
-│   └── github_repo
+│   ├── github_repo
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   ├── gke
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   └── vpc
 │       ├── main.tf
 │       ├── outputs.tf
 │       └── variables.tf
