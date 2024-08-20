@@ -17,3 +17,11 @@ output "repo_admin" {
 output "instance_admin" {
   value = google_project_iam_member.instance_admin.role
 }
+
+output "cloud_deploy_operator" {
+  value = google_project_iam_member.cloud_deploy_operator.role
+}
+
+output "storage_admin" {
+  value = google_project_iam_member.storage_admin.role
+}

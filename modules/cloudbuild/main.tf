@@ -48,8 +48,14 @@ resource "google_project_iam_member" "instance_admin" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "cloud_deploy_developer" {
+resource "google_project_iam_member" "cloud_deploy_operator" {
   project = var.gcp_project_id
-  role    = "roles/clouddeploy.developer"
+  role    = "roles/clouddeploy.operator"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
+}
+
+resource "google_project_iam_member" "storage_admin" {
+  project = var.gcp_project_id
+  role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
