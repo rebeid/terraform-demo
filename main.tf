@@ -1,17 +1,4 @@
-module "cloudbuild" {
-  source     = "./modules/cloudbuild"
-
-  gcp_project_id   = var.project
-  gcp_region       = var.region
-  github_repositry = module.github_repo.my_repository
-}
-
-module "docker_repo" {
-  source     = "./modules/docker_repo"
-
-  gcp_region       = var.region
-}
-
+# Source repo (GitHub) connection setup
 module "github_repo" {
   source     = "./modules/github_repo"
 
@@ -20,11 +7,11 @@ module "github_repo" {
   github_app_installation_id = var.github_app_installation_id
 }
 
-module "clouddeploy" {
-  source     = "./modules/clouddeploy"
+# App container repository setup
+module "docker_repo" {
+  source     = "./modules/docker_repo"
 
-  project = var.project
-  region  = var.region
+  gcp_region       = var.region
 }
 
 # One GKE autipilot cluster per target environment
@@ -38,11 +25,28 @@ module "gke" {
   target_env   = each.key
 }
 
-# A firefall rule to allow access to app
+# Allow access to app in all target environments
 module "firewall" {
   source     = "./modules/firewall"
 
-  name       = var.firewall_name
-  port       = var.firewall_port
-  target_tag = var.firewall_target_tag
+  name       = "custom-allow-${var.app_port}"
+  port       = var.app_port
+  target_tag = "allow-${var.app_port}"
+}
+
+# Cloud Build setup
+module "cloudbuild" {
+  source     = "./modules/cloudbuild"
+
+  gcp_project_id   = var.project
+  gcp_region       = var.region
+  github_repositry = module.github_repo.my_repository
+}
+
+# Cloud Deploy setup
+module "clouddeploy" {
+  source     = "./modules/clouddeploy"
+
+  project = var.project
+  region  = var.region
 }
