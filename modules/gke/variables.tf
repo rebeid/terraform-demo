@@ -1,4 +1,3 @@
-variable "env" {}
-variable "network" {}
+variable "project" {}
 variable "region" {}
-variable "subnet" {}
+variable "target_env" {}

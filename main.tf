@@ -35,17 +35,13 @@ module "clouddeploy" {
   region  = var.region
 }
 
-# Create a VPC network per target environment
-module "vpc" {
+# One GKE autipilot cluster per target environment
+module "gke" {
   for_each = local.target_environments
 
-  source  = "./modules/vpc"
+  source  = "./modules/gke"
 
-  env     = each.key
-  project = var.project
-  region  = var.region
-
-  #name        = "custom-rule-8090"
-  #ports       = ["8090"]
-  #target_tags = ["allow-8090"]
+  project      = var.project
+  region       = var.region
+  target_env   = each.key
 }
