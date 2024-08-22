@@ -8,7 +8,7 @@ module "vpc" {
   subnets = [
     {
       subnet_name   = "${var.env}-subnet"
-      subnet_ip     = "10.${var.env == "dev" ? 10 : 20}.10.0/24"
+      subnet_ip     = local.subnet_ip
       subnet_region = var.region
     },
   ]

@@ -1,6 +1,6 @@
-output "firewall_rule" {
-  value = module.firewall.firewall_rule
-}
+#output "firewall_rule" {
+#  value = module.firewall.firewall_rule
+#}
 
 output "docker_repo" {
   value = module.docker_repo.my_repository
@@ -40,4 +40,8 @@ output "service_account_role_6" {
 
 output "delivery_pipeline" {
   value = module.clouddeploy.delivery_pipeline
+}
+
+output "vpc_networks" {
+  value = module.vpc
 }

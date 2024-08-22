@@ -4,11 +4,11 @@ variable "firewall_target_tag" {}
 
 variable "github_app_installation_id" {}
 
-variable "gcp_project_id" {}
-variable "gcp_project_number" {}
-variable "gcp_svc_acct_key_file" {}
+variable "project" {}
+variable "project_number" {}
+variable "svc_acct_key_file" {}
 
-variable "gcp_region" {
+variable "region" {
   type    = string
   default = "us-central1"
 }

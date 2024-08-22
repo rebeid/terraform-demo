@@ -1,43 +1,51 @@
-
-provider "google" {
-  project     = var.gcp_project_id
-  region      = var.gcp_region
-  credentials = "${file(var.gcp_svc_acct_key_file)}"
-}
-
 module "cloudbuild" {
   source     = "./modules/cloudbuild"
 
-  gcp_project_id   = var.gcp_project_id
-  gcp_region       = var.gcp_region
+  gcp_project_id   = var.project
+  gcp_region       = var.region
   github_repositry = module.github_repo.my_repository
 }
 
 module "docker_repo" {
   source     = "./modules/docker_repo"
 
-  gcp_region       = var.gcp_region
+  gcp_region       = var.region
 }
 
-module "firewall" {
-  source     = "./modules/firewall"
-
-  name       = var.firewall_name
-  port       = var.firewall_port
-  target_tag = var.firewall_target_tag
-}
+#module "firewall" {
+#  source     = "./modules/firewall"
+#
+#  name       = var.firewall_name
+#  port       = var.firewall_port
+#  target_tag = var.firewall_target_tag
+#}
 
 module "github_repo" {
   source     = "./modules/github_repo"
 
-  gcp_project_number         = var.gcp_project_number
-  gcp_region                 = var.gcp_region
+  gcp_project_number         = var.project_number
+  gcp_region                 = var.region
   github_app_installation_id = var.github_app_installation_id
 }
 
 module "clouddeploy" {
   source     = "./modules/clouddeploy"
 
-  project = var.gcp_project_id
-  region  = var.gcp_region
+  project = var.project
+  region  = var.region
+}
+
+# Create a VPC network per target environment
+module "vpc" {
+  for_each = local.target_environments
+
+  source  = "./modules/vpc"
+
+  env     = each.key
+  project = var.project
+  region  = var.region
+
+  #name        = "custom-rule-8090"
+  #ports       = ["8090"]
+  #target_tags = ["allow-8090"]
 }
