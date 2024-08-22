@@ -1,12 +1,8 @@
-#output "firewall_rule" {
-#  value = module.firewall.firewall_rule
-#}
-
-output "docker_repo" {
+output "repo_artifact_registry" {
   value = module.docker_repo.my_repository
 }
 
-output "github_repo" {
+output "repo_github" {
   value = module.github_repo.my_repository
 }
 
@@ -96,4 +92,10 @@ output "vpc_subnet_prod" {
 
 output "vpc_subnet_ip_range_prod" {
   value = module.gke.prod.subnet_ip_range
+}
+
+# -----------------------------------------------------------------------------
+
+output "firewall_rule" {
+  value = module.firewall.rule
 }

@@ -1,4 +1,4 @@
-resource "google_compute_firewall" "firewall_rule" {
+resource "google_compute_firewall" "rule" {
   name        = var.name
   network     = "default"
 

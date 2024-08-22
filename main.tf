@@ -12,14 +12,6 @@ module "docker_repo" {
   gcp_region       = var.region
 }
 
-#module "firewall" {
-#  source     = "./modules/firewall"
-#
-#  name       = var.firewall_name
-#  port       = var.firewall_port
-#  target_tag = var.firewall_target_tag
-#}
-
 module "github_repo" {
   source     = "./modules/github_repo"
 
@@ -44,4 +36,13 @@ module "gke" {
   project      = var.project
   region       = var.region
   target_env   = each.key
+}
+
+# A firefall rule to allow access to app
+module "firewall" {
+  source     = "./modules/firewall"
+
+  name       = var.firewall_name
+  port       = var.firewall_port
+  target_tag = var.firewall_target_tag
 }
