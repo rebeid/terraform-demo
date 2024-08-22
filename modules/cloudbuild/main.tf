@@ -1,8 +1,9 @@
 # See https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger#example-usage---cloudbuild-trigger-service-account
 resource "google_cloudbuild_trigger" "cloudbuild_trigger" {
-  location = var.gcp_region
-  name     = "my-trigger"
-  filename = "cloudbuild.yaml"
+  location    = var.region
+  name        = "my-trigger"
+  description = "demo"
+  filename    = "cloudbuild.yaml"
 
   service_account = google_service_account.service_account.id
   depends_on = [
@@ -25,37 +26,37 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_project_iam_member" "sa_user" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "log_writer" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "repo_admin" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/artifactregistry.repoAdmin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "instance_admin" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/compute.instanceAdmin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "cloud_deploy_operator" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/clouddeploy.operator"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "storage_admin" {
-  project = var.gcp_project_id
+  project = var.project
   role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }

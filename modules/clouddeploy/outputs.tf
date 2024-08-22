@@ -1,3 +1,3 @@
 output "delivery_pipeline" {
-    value = google_clouddeploy_delivery_pipeline.primary.name
+    value = google_clouddeploy_delivery_pipeline.primary.id
 }
