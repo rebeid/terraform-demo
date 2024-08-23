@@ -23,7 +23,7 @@ resource "google_clouddeploy_delivery_pipeline" "primary" {
             kubernetes {
               service_networking {
                 service    = "my-service"
-                deployment = "my-deployment"
+                deployment = "my-app"
               }
             }
           }
