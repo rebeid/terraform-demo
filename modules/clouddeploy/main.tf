@@ -1,6 +1,6 @@
 resource "google_clouddeploy_delivery_pipeline" "primary" {
   location    = var.region
-  name        = "delivery-pipeline"
+  name        = "cd-pipeline"
   description = "demo"
 
   serial_pipeline {
@@ -17,6 +17,22 @@ resource "google_clouddeploy_delivery_pipeline" "primary" {
     stages {
       profiles  = ["prod"]
       target_id = google_clouddeploy_target.prod.name
+      strategy {
+        canary {
+          runtime_config {
+            kubernetes {
+              service_networking {
+                service    = "my-service"
+                deployment = "my-deployment"
+              }
+            }
+          }
+          canary_deployment {
+            percentages = [25, 50]
+            verify = false
+          }
+        }
+      }
     }
   }
 }
@@ -39,7 +55,7 @@ resource "google_clouddeploy_target" "stage" {
   require_approval = true
 
   gke {
-    cluster = "projects/${var.project}/locations/${var.region}/clusters/dev-cluster"
+    cluster = "projects/${var.project}/locations/${var.region}/clusters/stage-cluster"
   }
 }
 
