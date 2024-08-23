@@ -5,14 +5,17 @@ resource "google_clouddeploy_delivery_pipeline" "primary" {
 
   serial_pipeline {
     stages {
+      profiles  = ["dev"]
       target_id = google_clouddeploy_target.dev.name
     }
 
     stages {
+      profiles  = ["stage"]
       target_id = google_clouddeploy_target.stage.name
     }
 
     stages {
+      profiles  = ["prod"]
       target_id = google_clouddeploy_target.prod.name
     }
   }
