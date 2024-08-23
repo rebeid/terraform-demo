@@ -44,7 +44,7 @@ resource "google_clouddeploy_target" "dev" {
   require_approval = false
 
   gke {
-    cluster = "projects/${var.project}/locations/${var.region}/clusters/dev-cluster"
+    cluster = "projects/${var.project}/locations/${var.region}/clusters/dev"
   }
 }
 
@@ -55,7 +55,7 @@ resource "google_clouddeploy_target" "stage" {
   require_approval = true
 
   gke {
-    cluster = "projects/${var.project}/locations/${var.region}/clusters/stage-cluster"
+    cluster = "projects/${var.project}/locations/${var.region}/clusters/stage"
   }
 }
 
@@ -66,6 +66,6 @@ resource "google_clouddeploy_target" "prod" {
   require_approval = true
 
   gke {
-    cluster = "projects/${var.project}/locations/${var.region}/clusters/prod-cluster"
+    cluster = "projects/${var.project}/locations/${var.region}/clusters/prod"
   }
 }
