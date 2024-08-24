@@ -23,12 +23,13 @@ resource "google_clouddeploy_delivery_pipeline" "primary" {
             kubernetes {
               service_networking {
                 service    = "my-service"
-                deployment = "my-app"
+                deployment = "my-deployment"
+                disable_pod_overprovisioning = true
               }
             }
           }
           canary_deployment {
-            percentages = [25, 50]
+            percentages = [50]
             verify = false
           }
         }
